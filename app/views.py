@@ -4,7 +4,6 @@
 import random
 import string
 from flask import request, jsonify, abort
-from sqlalchemy import or_
 from . import APP, DB, logger
 from .models.session import Session
 from .models.teams import Team
@@ -14,10 +13,9 @@ from .util import new_session, validate_request
 @APP.route('/validate-session', methods=['POST'])
 def validate_session():
     """
-    Validates if the session is valid for the team
+    Validates if the session is valid and returns the team_id
 
     :param token: the token for the users session
-    :param team_id: the team number the session is for
 
     :returns: json dict containing either success or an error
     """
@@ -37,7 +35,7 @@ def validate_session():
     if session is None:
         raise errors.AuthError('Invalid session')
 
-    result['success'] = "Authorized"
+    result['success'] = session.uuid
 
     return jsonify(result)
 
@@ -72,7 +70,7 @@ def login():
         raise errors.AuthError('Invalid username or password')
 
     new_session(user.uuid, token, request.remote_addr)
-    result['token'] = user.uuid
+    result['token'] = token
 
     return jsonify(result)
 
@@ -177,5 +175,36 @@ def update_session():
     session.token = new_token
     DB.session.commit()
     result['success'] = 'Token updated'
+
+    return jsonify(result)
+
+@APP.route('/pub-key', methods=['POST'])
+def get_pub_key():
+    """
+        Returns the public key for the given team
+
+        :param team_id: the id of the team
+
+        :returns result: json dict containing either the public key or an error
+    """
+    result = dict()
+    data = request.get_json()
+    if data is None:
+        data = request.form
+        if data is None:
+            abort(400)
+
+    # make sure we have all the correct parameters
+    params = ['team_id']
+    validate_request(params, data)
+
+    team_id = data['team_id']
+
+    user = Team.query.filter_by(uuid=team_id).first()
+    if user is None:
+        raise errors.TeamError("Team not found")
+
+    pub_key = user.pub_key
+    result['pub_key'] = pub_key
 
     return jsonify(result)
