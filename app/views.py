@@ -46,7 +46,6 @@ def login():
 
     :param username: username of the team
     :param password: teams password
-    :param token: the auth token to be attached to this account
 
     :returns result: json dict containing either a success or an error
     """

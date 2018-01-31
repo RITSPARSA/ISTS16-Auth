@@ -7,10 +7,23 @@ from cryptography.hazmat.backends import default_backend
 from app import DB
 from app.models.teams import Team
 from app.models.session import Session
-from app.config import TEAMS, DEFAULT_PASSWORD, DEFAULT_BALANCE
+from app.config import (TEAMS, DEFAULT_PASSWORD, DEFAULT_BALANCE,
+                        WHITETEAM_USERNAME, WHITETEAM_PASSWORD)
 DB.create_all()
 
 print "Adding teams..."
+
+# ADD WHITE TEAM ACCOUNT
+new_team = Team(uuid=0, username=WHITETEAM_USERNAME,
+                password=WHITETEAM_PASSWORD, balance=1000000000,
+                pub_key=None, private_key=None)
+
+new_session = Session(uuid=0)
+
+DB.session.add(new_team)
+DB.session.add(new_session)
+
+# add team accounts
 for team in TEAMS:
     key = rsa.generate_private_key(
         backend=default_backend(),
