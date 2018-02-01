@@ -42,7 +42,7 @@ LOG_CONFIG = {
             'level': 'DEBUG',
             'formatter': 'standard',
             'class': 'logging.handlers.RotatingFileHandler',
-            'filename':  os.path.join(sys.path[0], 'app/logs/info.log'),
+            'filename':  '/var/www/ISTS16-Auth/app/logs/info.log',
             'mode': 'a',
             'backupCount': '16',
             'filters': ['info_filter']
@@ -51,7 +51,7 @@ LOG_CONFIG = {
             'level': 'ERROR',
             'formatter': 'standard',
             'class': 'logging.handlers.RotatingFileHandler',
-            'filename':  os.path.join(sys.path[0], 'app/logs/error.log'),
+            'filename':  '/var/www/ISTS16-Auth/app/logs/error.log',
             'mode': 'a',
             'backupCount': '16',
             'filters': ['error_filter']

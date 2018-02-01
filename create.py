@@ -14,14 +14,14 @@ DB.create_all()
 print "Adding teams..."
 
 # ADD WHITE TEAM ACCOUNT
-new_team = Team(uuid=0, username=WHITETEAM_USERNAME,
+white_team = Team(uuid=0, username=WHITETEAM_USERNAME,
                 password=WHITETEAM_PASSWORD, balance=1000000000,
                 pub_key=None, private_key=None)
 
-new_session = Session(uuid=0)
+white_team_session = Session(uuid=0)
 
-DB.session.add(new_team)
-DB.session.add(new_session)
+DB.session.add(white_team)
+DB.session.add(white_team_session)
 
 # add team accounts
 for team in TEAMS:
@@ -39,7 +39,7 @@ for team in TEAMS:
         serialization.Encoding.OpenSSH,
         serialization.PublicFormat.OpenSSH
     )
-
+    
     new_team = Team(uuid=team, username='team{}'.format(team),
                     password=DEFAULT_PASSWORD, balance=DEFAULT_BALANCE,
                     pub_key=public_key, private_key=private_key)
