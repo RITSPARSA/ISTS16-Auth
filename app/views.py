@@ -70,6 +70,7 @@ def login():
 
     new_session(user.uuid, token, request.remote_addr)
     result['token'] = token
+    result['team_id'] = user.uuid
 
     return jsonify(result)
 
