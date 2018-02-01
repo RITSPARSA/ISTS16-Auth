@@ -13,7 +13,7 @@ class ErrorFilter(logging.Filter):
     def filter(self, rec):
         return rec.levelno == logging.ERROR
 
-WHITETEAM_USERNAME = "theblindmince"
+WHITETEAM_USERNAME = "theblindmice"
 WHITETEAM_PASSWORD = "basedgodboyuan1016"
 
 REDTEAM_USERNAME = "raiders"
