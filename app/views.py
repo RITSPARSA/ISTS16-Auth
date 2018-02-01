@@ -1,6 +1,7 @@
 """
     Entry point for API calls
 """
+import json
 import random
 import string
 from flask import request, jsonify, abort, make_response
@@ -71,7 +72,7 @@ def login():
     new_session(user.uuid, token, request.remote_addr)
     result['token'] = token
     result['team_id'] = user.uuid
-    resp = make_response(result, 200)
+    resp = make_response(json.dumps(result), 200)
     resp.headers['Access-Control-Allow-Origin'] = '*'
     resp.headers['Access-Control-Allow-Credentials'] = 'true'
 
