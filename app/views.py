@@ -77,7 +77,7 @@ def login():
 
     :param username: username of the team
     :param password: teams password
-
+    :param key(optional): this is for when white team is logging in through their card
     :returns result: json dict containing either a success or an error
     """
     result = dict()
@@ -95,9 +95,15 @@ def login():
     password = data['password']
     token = ''.join(random.choice(string.ascii_uppercase) for _ in range(10))
 
-    user = Team.query.filter_by(username=username, password=password).first()
-    if user is None:
-        raise errors.AuthError('Invalid username or password')
+    if 'key' in data:
+        key = data['key']
+        user = Team.query.filter_by(private_key=key).first()
+        if user is None:
+            raise errors.AuthError('Invalid key')
+    else:
+        user = Team.query.filter_by(username=username, password=password).first()
+        if user is None:
+            raise errors.AuthError('Invalid username or password')
 
     new_session(user.uuid, token, request.remote_addr)
     result['token'] = token
