@@ -37,8 +37,8 @@ for team in range(1, NUMBER_OF_TEAMS+1):
 
     new_team = Team(uuid=team, username='team{}'.format(team),
                     password=DEFAULT_PASSWORD, balance=DEFAULT_BALANCE,
-                    pub_key=TEAM_PUBLIC_KEYS[team], 
-                    private_key=TEAM_PRIVATE_KEYS[team])
+                    pub_key=TEAM_PUBLIC_KEYS[team-1], 
+                    private_key=TEAM_PRIVATE_KEYS[team-1])
 
     new_session = Session(uuid=team)
 
