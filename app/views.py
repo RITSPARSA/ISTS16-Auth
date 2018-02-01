@@ -3,7 +3,7 @@
 """
 import random
 import string
-from flask import request, jsonify, abort
+from flask import request, jsonify, abort, make_response
 from . import APP, DB, logger
 from .models.session import Session
 from .models.teams import Team
@@ -71,8 +71,11 @@ def login():
     new_session(user.uuid, token, request.remote_addr)
     result['token'] = token
     result['team_id'] = user.uuid
+    resp = make_response(result, 200)
+    resp.headers['Access-Control-Allow-Origin'] = '*'
+    resp.headers['Access-Control-Allow-Credentials'] = 'true'
 
-    return jsonify(result)
+    return resp
 
 @APP.route('/update-password', methods=['POST'])
 def update_password():
