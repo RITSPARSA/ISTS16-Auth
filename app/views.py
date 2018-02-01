@@ -11,6 +11,36 @@ from .models.teams import Team
 from . import errors
 from .util import new_session, validate_request
 
+@APP.route('/validate-key', methods=['POST'])
+def validate_key():
+    """
+    Validates if the session is valid and returns the team_id
+
+    :param key: the private key for the user
+
+    :returns: json dict containing the token and team_id
+    """
+    result = dict()
+    data = request.get_json()
+    if data is None:
+        data = request.form
+        if data is None:
+            abort(400)
+
+    # make sure we have all the correct parameters
+    params = ['key']
+    validate_request(params, data)
+    key = data['key']
+    user = Team.query.filter_by(private_key=key).first()
+
+    if user is None:
+        raise errors.AuthError('Invalid key')
+
+    result['team'] = user.uuid
+
+    return jsonify(result)
+
+
 @APP.route('/validate-session', methods=['POST'])
 def validate_session():
     """
