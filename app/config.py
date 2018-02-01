@@ -15,6 +15,10 @@ class ErrorFilter(logging.Filter):
 
 WHITETEAM_USERNAME = "theblindmince"
 WHITETEAM_PASSWORD = "basedgodboyuan1016"
+
+REDTEAM_USERNAME = "raiders"
+REDTEAM_PASSWORD = "miserylovescompany96"
+
 NUMBER_OF_TEAMS = 12
 TEAMS = [x for x in range(1, NUMBER_OF_TEAMS+1)]
 DEFAULT_PASSWORD = 'Changeme-2018'
