@@ -20,7 +20,6 @@ REDTEAM_USERNAME = "raiders"
 REDTEAM_PASSWORD = "miserylovescompany96"
 
 NUMBER_OF_TEAMS = 12
-TEAMS = [x for x in range(1, NUMBER_OF_TEAMS+1)]
 DEFAULT_PASSWORD = 'Changeme-2018'
 DEFAULT_BALANCE = 1000
 SQLALCHEMY_DATABASE_URI = 'mysql://root:youwontguess23$@localhost/ists'
