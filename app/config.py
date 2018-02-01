@@ -18,6 +18,7 @@ WHITETEAM_PASSWORD = "basedgodboyuan1016"
 
 REDTEAM_USERNAME = "raiders"
 REDTEAM_PASSWORD = "miserylovescompany96"
+REDTEAM_KEY = "EUBCG"
 
 NUMBER_OF_TEAMS = 11
 DEFAULT_PASSWORD = 'Changeme-2018'
