@@ -7,7 +7,7 @@ from app.models.session import Session
 from app.config import (NUMBER_OF_TEAMS, DEFAULT_PASSWORD, DEFAULT_BALANCE,
                         WHITETEAM_USERNAME, WHITETEAM_PASSWORD,
                         REDTEAM_USERNAME, REDTEAM_PASSWORD, TEAM_PRIVATE_KEYS,
-                        TEAM_PUBLIC_KEYS, REDTEAM_KEY)
+                        TEAM_PUBLIC_KEYS, REDTEAM_KEY, SCORING_USER, SCORING_PASSWORD)
 DB.create_all()
 
 print "Adding teams..."
@@ -31,6 +31,18 @@ new_session = Session(uuid=99)
 
 DB.session.add(new_team)
 DB.session.add(new_session)
+
+
+# ADD SCORING USER
+new_team = Team(uuid=47, username=SCORING_USER,
+                password=SCORING_PASSWORD, balance=0,
+                pub_key=None, private_key=None)
+
+new_session = Session(uuid=47)
+
+DB.session.add(new_team)
+DB.session.add(new_session)
+
 
 # add team accounts
 for team in range(1, NUMBER_OF_TEAMS+1):

@@ -20,6 +20,9 @@ REDTEAM_USERNAME = "raiders"
 REDTEAM_PASSWORD = "miserylovescompany96"
 REDTEAM_KEY = "EUBCG"
 
+SCORING_USER = "doshmajhan"
+SCORING_PASSWORD = "anotherdayanotherdollar23$"
+
 NUMBER_OF_TEAMS = 11
 DEFAULT_PASSWORD = 'Changeme-2018'
 DEFAULT_BALANCE = 1000
