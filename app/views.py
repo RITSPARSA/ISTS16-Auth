@@ -89,14 +89,6 @@ def login():
         if data is None:
             abort(400)
 
-    # make sure we have all the correct parameters
-    params = ['username', 'password']
-    validate_request(params, data)
-
-    username = data['username']
-    password = data['password']
-    token = ''.join(random.choice(string.ascii_uppercase) for _ in range(10))
-
     if 'key' in data:
         key = data['key']
         key = key[5:-1]
@@ -104,9 +96,16 @@ def login():
         if user is None:
             raise errors.AuthError('Invalid key')
     else:
+        params = ['username', 'password']
+        validate_request(params, data)
+
+        username = data['username']
+        password = data['password']
         user = Team.query.filter_by(username=username, password=password).first()
         if user is None:
             raise errors.AuthError('Invalid username or password')
+
+    token = ''.join(random.choice(string.ascii_uppercase) for _ in range(10))
 
     new_session(user.uuid, token, request.remote_addr)
     result['token'] = token
