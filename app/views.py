@@ -105,9 +105,14 @@ def login():
         if user is None:
             raise errors.AuthError('Invalid username or password')
 
-    token = ''.join(random.choice(string.ascii_uppercase) for _ in range(10))
+    # IF TOKEN ALREADY EXISTS THEN SEND THAT ONE BACK
+    sesh = Session.query.filter_by(uuid=user.uuid).first()
+    if sesh.token is not None:
+        token = sesh.token
+    else:
+        token = ''.join(random.choice(string.ascii_uppercase) for _ in range(10))
+        new_session(user.uuid, token, request.remote_addr)
 
-    new_session(user.uuid, token, request.remote_addr)
     result['token'] = token
     result['team_id'] = user.uuid
     resp = make_response(json.dumps(result), 200)
