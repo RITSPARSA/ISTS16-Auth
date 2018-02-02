@@ -68,7 +68,7 @@ def validate_session():
     if session is None:
         raise errors.AuthError('Invalid session')
 
-    result['success'] = str(session.uuid)
+    result['success'] = session.uuid
 
     return jsonify(result)
 
