@@ -62,6 +62,8 @@ def validate_session():
     validate_request(params, data)
 
     token = data['token']
+    token = token.replace("token=", "")
+
     session = Session.query.filter_by(token=token).first()
     if session is None:
         raise errors.AuthError('Invalid session')
