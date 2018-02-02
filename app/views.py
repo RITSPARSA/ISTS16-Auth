@@ -97,6 +97,7 @@ def login():
 
     if 'key' in data:
         key = data['key']
+        key = key[5:-1]
         user = Team.query.filter_by(private_key=key).first()
         if user is None:
             raise errors.AuthError('Invalid key')
