@@ -24,8 +24,10 @@ SCORING_USER = "doshmajhan"
 SCORING_PASSWORD = "anotherdayanotherdollar23$"
 
 NUMBER_OF_TEAMS = 11
-DEFAULT_PASSWORD = 'Changeme-2018'
-DEFAULT_BALANCE = 1000
+TEAM_PASSWORDS = ['momentdue2018', 'countryyes2018', 'societybus2018', 'meprompt2018',
+                  'accountdown2018', 'clueedition2018', 'accuracysort2018', 'thousandtea2018',
+                  'hurryexercise2018', 'carrymeeting2018', 'rubbishability2018']
+DEFAULT_BALANCE = 50000
 SQLALCHEMY_DATABASE_URI = 'mysql://root:youwontguess23$@localhost/ists'
 
 TEAM_PRIVATE_KEYS = ['3DM3Z', 'JV8IB', '4ZWA6', '4URL3', 'WEF54', 'C4009',

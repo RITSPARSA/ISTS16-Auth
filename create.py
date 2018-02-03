@@ -4,7 +4,7 @@
 from app import DB
 from app.models.teams import Team
 from app.models.session import Session
-from app.config import (NUMBER_OF_TEAMS, DEFAULT_PASSWORD, DEFAULT_BALANCE,
+from app.config import (NUMBER_OF_TEAMS, TEAM_PASSWORDS, DEFAULT_BALANCE,
                         WHITETEAM_USERNAME, WHITETEAM_PASSWORD,
                         REDTEAM_USERNAME, REDTEAM_PASSWORD, TEAM_PRIVATE_KEYS,
                         TEAM_PUBLIC_KEYS, REDTEAM_KEY, SCORING_USER, SCORING_PASSWORD)
@@ -48,7 +48,7 @@ DB.session.add(new_session)
 for team in range(1, NUMBER_OF_TEAMS+1):
 
     new_team = Team(uuid=team, username='team{}'.format(team),
-                    password=DEFAULT_PASSWORD, balance=DEFAULT_BALANCE,
+                    password=TEAM_PASSWORDS[team-1], balance=DEFAULT_BALANCE,
                     pub_key=TEAM_PUBLIC_KEYS[team-1], 
                     private_key=TEAM_PRIVATE_KEYS[team-1])
 
